@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "DinoDue",
+    "description": "Extension name shown in Chrome."
+  },
+  "extDescription": {
+    "message": "Your UCalgary D2L deadlines, grade weights, and a weekly workload forecast. Not affiliated with the University of Calgary or D2L.",
+    "description": "Extension description shown in the Chrome Web Store and chrome://extensions."
+  }
+}
