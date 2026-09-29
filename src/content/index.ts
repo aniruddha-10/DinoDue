@@ -3,6 +3,7 @@
 
 import { SignedOutError, createClient } from "../d2l/api";
 import { NoApiVersionsError, runSync } from "../d2l/sync";
+import { applyManualLinks } from "../shared/links";
 import { patchStore, readStore } from "../shared/storage";
 import type { SyncErrorCode } from "../types";
 
@@ -26,8 +27,11 @@ async function sync(force: boolean) {
   await patchStore({ pendingSync: false, sync: { ...state, status: "syncing", startedAt: now, error: null } });
   try {
     const result = await runSync(createClient(), store);
+    // The student may have fixed a weight match while this sync ran.
+    const { manualGradeLinks } = await readStore();
     await patchStore({
       ...result,
+      deadlines: applyManualLinks(result.deadlines, result.gradeItems, manualGradeLinks),
       sync: { status: "idle", startedAt: null, lastSyncedAt: Date.now(), error: null },
     });
   } catch (e) {

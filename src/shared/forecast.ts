@@ -38,11 +38,14 @@ export function outlook(deadlines: Deadline[], now: Date): Outlook {
   const todo = deadlines.filter((d) => within(d, t, 0, WINDOW_DAYS) && d.submitted !== true);
   const stake = Math.round(todo.reduce((s, d) => s + (d.weight ?? 0), 0) * 10) / 10;
   const count = todo.length;
+  return { weather: classify(stake, count), count, stake };
+}
 
-  let weather: Weather = "clear";
-  if (count && (stake >= STORM_STAKE || count >= STORM_COUNT)) weather = "storm";
-  else if (count && (stake >= CLOUDY_STAKE || count >= CLOUDY_COUNT)) weather = "cloudy";
-  return { weather, count, stake };
+export function classify(stake: number, count: number): Weather {
+  if (!count) return "clear";
+  if (stake >= STORM_STAKE || count >= STORM_COUNT) return "storm";
+  if (stake >= CLOUDY_STAKE || count >= CLOUDY_COUNT) return "cloudy";
+  return "clear";
 }
 
 // "Up next" is the next 7 days, still-to-do first, heaviest first.

@@ -7,14 +7,14 @@ import "../styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { t, uiLocale } from "../shared/i18n";
-import { Popup } from "./Popup";
+import { Forecast } from "./Forecast";
 
 document.documentElement.lang = uiLocale();
-document.title = t("extName");
-document.body.classList.add("popup-body");
+document.title = t("pageTitle", t("forecastPageTitle"), t("extName"));
+document.body.classList.add("page-body");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Popup />
+    <Forecast />
   </StrictMode>,
 );

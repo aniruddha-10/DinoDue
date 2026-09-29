@@ -6,7 +6,7 @@
 // - One endpoint returns an HTTP error (UCalgary blocks some tools in some
 //   courses, e.g. a 403): treated as "nothing there" and the sync goes on.
 
-import { D2L_ORIGIN, type CourseWeights, type Deadline, type Store, type User } from "../types";
+import { D2L_ORIGIN, type CourseWeights, type Deadline, type GradeItemInfo, type Store, type User } from "../types";
 import * as api from "./api";
 import { HttpError, type D2LClient } from "./api";
 import { linkGradeItems } from "./link";
@@ -19,7 +19,7 @@ const EVENTS_AHEAD_DAYS = 150;
 
 export class NoApiVersionsError extends Error {}
 
-export type SyncResult = Pick<Store, "user" | "candidates" | "deadlines" | "weights">;
+export type SyncResult = Pick<Store, "user" | "candidates" | "deadlines" | "gradeItems" | "weights">;
 
 // Resolves to `fallback` on an HTTP error; rethrows sign-out and network errors.
 async function optional<T>(p: Promise<T>, fallback: T): Promise<T> {
@@ -50,7 +50,7 @@ async function syncCourse(
   courseId: number,
   events: Deadline[],
   manual: Record<string, number | null>,
-): Promise<{ deadlines: Deadline[]; weights: CourseWeights }> {
+): Promise<{ deadlines: Deadline[]; gradeItems: GradeItemInfo[]; weights: CourseWeights }> {
   const [folders, quizzes, setup, objects, categories, values] = await Promise.all([
     optional(api.getFolders(c, le, courseId), []),
     optional(api.getQuizzes(c, le, courseId), []),
@@ -80,8 +80,17 @@ async function syncCourse(
     grade: d.gradeItemId !== null ? (progress.gradeByItem.get(d.gradeItemId) ?? null) : null,
   }));
 
+  const gradeItems = objects.map((o) => ({
+    courseId,
+    id: o.Id,
+    name: o.Name,
+    weight: model.shareByItem.get(o.Id) ?? null,
+    grade: progress.gradeByItem.get(o.Id) ?? null,
+  }));
+
   return {
     deadlines,
+    gradeItems,
     weights: {
       courseId,
       rawTotal: model.rawTotal,
@@ -113,11 +122,11 @@ export async function runSync(
   const candidates = buildCandidates(courses, enrollments, now);
 
   // Until the student confirms the picker, only the course list is fetched.
-  if (prev.selectedCourseIds === null) return { user, candidates, deadlines: [], weights: [] };
+  if (prev.selectedCourseIds === null) return { user, candidates, deadlines: [], gradeItems: [], weights: [] };
 
   const available = new Set(candidates.map((x) => x.id));
   const selected = prev.selectedCourseIds.filter((id) => available.has(id));
-  if (!selected.length) return { user, candidates, deadlines: [], weights: [] };
+  if (!selected.length) return { user, candidates, deadlines: [], gradeItems: [], weights: [] };
 
   const from = new Date(now.getTime() - EVENTS_PAST_DAYS * 864e5);
   const to = new Date(now.getTime() + EVENTS_AHEAD_DAYS * 864e5);
@@ -132,6 +141,7 @@ export async function runSync(
     user,
     candidates,
     deadlines: perCourse.flatMap((r) => r.deadlines).sort((a, b) => Date.parse(a.dueAt) - Date.parse(b.dueAt)),
+    gradeItems: perCourse.flatMap((r) => r.gradeItems),
     weights: perCourse.map((r) => r.weights),
   };
 }

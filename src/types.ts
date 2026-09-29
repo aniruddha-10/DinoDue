@@ -51,6 +51,16 @@ export interface Deadline {
   grade: Grade | null;     // null = not graded or not released
 }
 
+// A gradebook entry, kept so the student can pick the right one when a
+// deadline was matched by name or not at all.
+export interface GradeItemInfo {
+  courseId: number;
+  id: number;
+  name: string;
+  weight: number | null;   // share of the final course grade, in percent
+  grade: Grade | null;
+}
+
 // Per-course summary of how the gradebook's weights add up.
 export interface CourseWeights {
   courseId: number;
@@ -86,6 +96,7 @@ export interface Store {
   hiddenEventCourseIds: number[];     // courses whose calendar events are hidden
   manualGradeLinks: Record<string, number | null>; // deadline id -> grade item id
   deadlines: Deadline[];
+  gradeItems: GradeItemInfo[];
   weights: CourseWeights[];
   sync: SyncState;
   pendingSync: boolean;
@@ -98,6 +109,7 @@ export const EMPTY_STORE: Store = {
   hiddenEventCourseIds: [],
   manualGradeLinks: {},
   deadlines: [],
+  gradeItems: [],
   weights: [],
   sync: { status: "idle", startedAt: null, lastSyncedAt: null, error: null },
   pendingSync: false,

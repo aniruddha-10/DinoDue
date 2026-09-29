@@ -1,8 +1,10 @@
-// Things the popup asks for. Syncing itself happens in the content script on
-// a D2L page (it has the student's session), so the popup just sets a flag.
+// Things the popup and forecast page ask for. Syncing itself happens in the
+// content script on a D2L page (it has the student's session), so the pages
+// just set a flag.
 
 import { D2L_ORIGIN } from "../types";
-import { patchStore } from "./storage";
+import { applyManualLinks } from "./links";
+import { patchStore, readStore } from "./storage";
 
 const HOME = `${D2L_ORIGIN}/d2l/home`;
 
@@ -22,4 +24,27 @@ export async function requestSync() {
 export async function saveCourses(ids: number[]) {
   await patchStore({ selectedCourseIds: ids });
   await requestSync();
+}
+
+export function openForecast() {
+  void chrome.tabs.create({ url: chrome.runtime.getURL("forecast.html") });
+}
+
+// The student's own deadline -> gradebook choice (null = "not graded").
+// Applied to the stored deadlines right away, and by every later sync.
+export async function setGradeLink(deadlineId: string, gradeItemId: number | null) {
+  const store = await readStore();
+  const manualGradeLinks = { ...store.manualGradeLinks, [deadlineId]: gradeItemId };
+  await patchStore({
+    manualGradeLinks,
+    deadlines: applyManualLinks(store.deadlines, store.gradeItems, manualGradeLinks),
+  });
+}
+
+export async function setEventsHidden(courseId: number, hidden: boolean) {
+  const store = await readStore();
+  const ids = new Set(store.hiddenEventCourseIds);
+  if (hidden) ids.add(courseId);
+  else ids.delete(courseId);
+  await patchStore({ hiddenEventCourseIds: [...ids] });
 }

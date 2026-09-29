@@ -7,28 +7,46 @@
     "message": "Your UCalgary D2L deadlines, grade weights, and a weekly workload forecast. Not affiliated with the University of Calgary or D2L.",
     "description": "Extension description shown in the Chrome Web Store and chrome://extensions."
   },
-
   "termFall": {
     "message": "Fall $YEAR$",
     "description": "Term label in the popup header.",
-    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
   },
   "termWinter": {
     "message": "Winter $YEAR$",
     "description": "Term label in the popup header.",
-    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
   },
   "termSpring": {
     "message": "Spring $YEAR$",
     "description": "Term label in the popup header.",
-    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
   },
   "termSummer": {
     "message": "Summer $YEAR$",
     "description": "Term label in the popup header.",
-    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+    "placeholders": {
+      "year": {
+        "content": "$1",
+        "example": "2026"
+      }
+    }
   },
-
   "welcomeTitle": {
     "message": "See what's due, and what it's worth",
     "description": "Heading on the first screen, before DinoDue has read D2L."
@@ -41,7 +59,6 @@
     "message": "Open D2L",
     "description": "Button that opens d2l.ucalgary.ca in a new tab."
   },
-
   "bannerSyncing": {
     "message": "Syncing with D2L…",
     "description": "Status while DinoDue is reading D2L."
@@ -66,7 +83,6 @@
     "message": "D2L didn't respond as expected. Try again later.",
     "description": "Shown when D2L's API version list couldn't be read."
   },
-
   "pickerTitle": {
     "message": "Pick this term's courses",
     "description": "Heading of the course picker."
@@ -102,7 +118,12 @@
   "pickerSelectedOther": {
     "message": "$COUNT$ courses selected",
     "description": "Course picker count, plural.",
-    "placeholders": { "count": { "content": "$1", "example": "5" } }
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
   },
   "pickerSave": {
     "message": "Save courses",
@@ -120,7 +141,6 @@
     "message": "Cancel",
     "description": "Button that closes the course picker without saving."
   },
-
   "forecastStorm": {
     "message": "Storm warning this week",
     "description": "Forecast headline for a heavy week."
@@ -140,7 +160,12 @@
   "forecastDueOther": {
     "message": "$COUNT$ due in the next 7 days",
     "description": "Forecast detail, plural.",
-    "placeholders": { "count": { "content": "$1", "example": "4" } }
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
   },
   "forecastNoneDue": {
     "message": "Nothing due in the next 7 days",
@@ -149,9 +174,13 @@
   "forecastStake": {
     "message": "$PERCENT$ of your grades at stake",
     "description": "Forecast detail: combined weight of what's due this week.",
-    "placeholders": { "percent": { "content": "$1", "example": "42%" } }
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "42%"
+      }
+    }
   },
-
   "sectionUpNext": {
     "message": "Up next, by impact",
     "description": "Heading for deadlines in the next 7 days, sorted by grade weight."
@@ -175,19 +204,33 @@
   "weightOf": {
     "message": "$PERCENT$ of final grade",
     "description": "Accessible label for the weight badge.",
-    "placeholders": { "percent": { "content": "$1", "example": "25%" } }
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "25%"
+      }
+    }
   },
   "dueToday": {
     "message": "Today, $TIME$",
     "description": "Due time for something due today.",
-    "placeholders": { "time": { "content": "$1", "example": "6:00 PM" } }
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
   },
   "dueTomorrow": {
     "message": "Tomorrow, $TIME$",
     "description": "Due time for something due tomorrow.",
-    "placeholders": { "time": { "content": "$1", "example": "6:00 PM" } }
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
   },
-
   "syncNow": {
     "message": "Sync",
     "description": "Button that refreshes data from D2L."
@@ -199,10 +242,249 @@
   "lastSynced": {
     "message": "Synced $WHEN$",
     "description": "When the last sync finished.",
-    "placeholders": { "when": { "content": "$1", "example": "5 minutes ago" } }
+    "placeholders": {
+      "when": {
+        "content": "$1",
+        "example": "5 minutes ago"
+      }
+    }
   },
   "neverSynced": {
     "message": "Not synced yet",
     "description": "Shown before the first sync finishes."
+  },
+  "openForecast": {
+    "message": "Open the term forecast",
+    "description": "Accessible label for the popup's forecast card, which opens the forecast page."
+  },
+  "forecastPageTitle": {
+    "message": "Term forecast",
+    "description": "Heading of the forecast page."
+  },
+  "skylineCaption": {
+    "message": "Each peak is how much of your final grades is due that week. Red is still to do; pale is already submitted.",
+    "description": "Explains the mountain chart."
+  },
+  "weekOf": {
+    "message": "Week of $DATE$",
+    "description": "Label for a week, by its Monday.",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "Oct 5"
+      }
+    }
+  },
+  "weekThis": {
+    "message": "This week",
+    "description": "Label under the current week in the chart."
+  },
+  "weekDueOne": {
+    "message": "1 due",
+    "description": "Week summary, singular."
+  },
+  "weekDueOther": {
+    "message": "$COUNT$ due",
+    "description": "Week summary, plural.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "weekNoneDue": {
+    "message": "Nothing due",
+    "description": "Week summary when the week is empty."
+  },
+  "weekStake": {
+    "message": "$PERCENT$ of final grades",
+    "description": "Week summary: combined weight due that week.",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "24%"
+      }
+    }
+  },
+  "weekAria": {
+    "message": "$WEEK$: $SUMMARY$",
+    "description": "Screen reader label for a week in the chart.",
+    "placeholders": {
+      "week": {
+        "content": "$1",
+        "example": "Week of Oct 5"
+      },
+      "summary": {
+        "content": "$2",
+        "example": "3 due, 24% of final grades"
+      }
+    }
+  },
+  "weekSummary": {
+    "message": "$COUNT$, $STAKE$",
+    "description": "Joins the week's count and weight.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3 due"
+      },
+      "stake": {
+        "content": "$2",
+        "example": "24% of final grades"
+      }
+    }
+  },
+  "weatherStorm": {
+    "message": "Storm",
+    "description": "Short label under a heavy week in the chart."
+  },
+  "weekEmpty": {
+    "message": "Nothing due this week.",
+    "description": "Shown when the selected week has no deadlines."
+  },
+  "kindAssignment": {
+    "message": "Assignment",
+    "description": "Tag on an assignment."
+  },
+  "kindQuiz": {
+    "message": "Quiz",
+    "description": "Tag on a quiz."
+  },
+  "kindEvent": {
+    "message": "Course event",
+    "description": "Tag on an event an instructor added to the D2L calendar."
+  },
+  "coursesTitle": {
+    "message": "Your courses",
+    "description": "Heading of the per-course summary."
+  },
+  "weightsExact": {
+    "message": "Gradebook weights add up to 100%.",
+    "description": "Course weights summary."
+  },
+  "weightsScaled": {
+    "message": "Gradebook weights add up to $TOTAL$, so each is shown as its share of 100%.",
+    "description": "Course weights summary when D2L's weights add up to more than 100.",
+    "placeholders": {
+      "total": {
+        "content": "$1",
+        "example": "140%"
+      }
+    }
+  },
+  "weightsPartial": {
+    "message": "$MISSING$ of this course isn't in D2L yet, often the final exam.",
+    "description": "Course weights summary when D2L's weights add up to less than 100.",
+    "placeholders": {
+      "missing": {
+        "content": "$1",
+        "example": "20%"
+      }
+    }
+  },
+  "weightsNone": {
+    "message": "No weighted gradebook in D2L.",
+    "description": "Course weights summary when the course doesn't use weights."
+  },
+  "gradeSoFar": {
+    "message": "Grade so far: $GRADE$ on $DONE$ of the course",
+    "description": "Grade over released items.",
+    "placeholders": {
+      "grade": {
+        "content": "$1",
+        "example": "87.5%"
+      },
+      "done": {
+        "content": "$2",
+        "example": "20%"
+      }
+    }
+  },
+  "gradeNone": {
+    "message": "No grades released yet.",
+    "description": "Shown before any grades are released."
+  },
+  "showEvents": {
+    "message": "Show instructor calendar events",
+    "description": "Toggle for a course's D2L calendar events."
+  },
+  "matchesTitle": {
+    "message": "Check weight matches",
+    "description": "Heading of the weight-match review."
+  },
+  "matchesBody": {
+    "message": "These were matched to the gradebook by a similar name, or not at all. Pick the right gradebook item so the weights are right.",
+    "description": "Explains the weight-match review."
+  },
+  "matchesDone": {
+    "message": "Every deadline is matched to the gradebook.",
+    "description": "Shown when nothing needs checking."
+  },
+  "matchFuzzy": {
+    "message": "Matched by name",
+    "description": "Tag: matched by a similar name."
+  },
+  "matchNone": {
+    "message": "Not matched",
+    "description": "Tag: no gradebook item found."
+  },
+  "matchManual": {
+    "message": "Set by you",
+    "description": "Tag: the student picked the gradebook item."
+  },
+  "matchSelectLabel": {
+    "message": "Gradebook item for $TITLE$",
+    "description": "Accessible label for the gradebook dropdown.",
+    "placeholders": {
+      "title": {
+        "content": "$1",
+        "example": "Assignment 1"
+      }
+    }
+  },
+  "matchChoose": {
+    "message": "Choose a gradebook item",
+    "description": "Placeholder option in the gradebook dropdown."
+  },
+  "matchNotGraded": {
+    "message": "Not graded",
+    "description": "Dropdown option: this deadline isn't in the gradebook."
+  },
+  "matchOption": {
+    "message": "$NAME$ ($PERCENT$)",
+    "description": "Dropdown option: gradebook item and its weight.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Assignment 1"
+      },
+      "percent": {
+        "content": "$2",
+        "example": "10%"
+      }
+    }
+  },
+  "forecastEmpty": {
+    "message": "No deadlines yet. Open DinoDue from the toolbar to pick your courses and sync.",
+    "description": "Shown on the forecast page before any data exists."
+  },
+  "notAffiliated": {
+    "message": "Not affiliated with the University of Calgary or D2L.",
+    "description": "Footer disclaimer on the forecast page."
+  },
+  "pageTitle": {
+    "message": "$PAGE$ · $APP$",
+    "description": "Browser tab title for extension pages.",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "Term forecast"
+      },
+      "app": {
+        "content": "$2",
+        "example": "DinoDue"
+      }
+    }
   }
 }

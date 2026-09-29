@@ -3,10 +3,10 @@ import { courseColor } from "../shared/colors";
 import type { Outlook } from "../shared/forecast";
 import { dueParts, percent } from "../shared/format";
 import { t, uiLocale, type MessageKey } from "../shared/i18n";
-import { openD2L, saveCourses } from "../shared/actions";
-import { currentTerm } from "../d2l/normalize";
+import { openD2L, openForecast, saveCourses } from "../shared/actions";
+import { currentTerm, shortCourseCode } from "../d2l/normalize";
 import type { CourseCandidate, Deadline, Store, SuggestReason } from "../types";
-import { CheckIcon, CloudIcon, StormIcon, SunIcon, WindIcon } from "./Icons";
+import { CheckIcon, ChevronIcon, CloudIcon, StormIcon, SunIcon, WindIcon } from "./Icons";
 
 const TERM_KEYS: Record<string, MessageKey> = {
   fall: "termFall",
@@ -15,7 +15,7 @@ const TERM_KEYS: Record<string, MessageKey> = {
   summer: "termSummer",
 };
 
-export const courseLabel = (c: CourseCandidate | undefined) => c?.code || c?.name || "";
+export const courseLabel = (c: CourseCandidate | undefined) => shortCourseCode(c?.code ?? null) || c?.name || "";
 
 // ---- Header ----
 
@@ -150,7 +150,7 @@ export function Picker({ store, onDone }: { store: Store; onDone: () => void }) 
             <input type="checkbox" checked={selected.has(c.id)} onChange={() => toggle(c.id)} />
             <span className="pick-text">
               <span className="pick-name">{c.name}</span>
-              {c.code && c.code !== c.name && <span className="pick-code">{c.code}</span>}
+              {c.code && c.code !== c.name && <span className="pick-code">{shortCourseCode(c.code)}</span>}
             </span>
             {c.reason && <span className="chip">{t(REASON_KEYS[c.reason])}</span>}
           </label>
@@ -203,14 +203,21 @@ export function ForecastCard({ outlook }: { outlook: Outlook }) {
   const due =
     outlook.count === 0 ? t("forecastNoneDue") : outlook.count === 1 ? t("forecastDueOne") : t("forecastDueOther", outlook.count);
   return (
-    <section className={`forecast forecast-${outlook.weather}`}>
+    <button
+      type="button"
+      className={`forecast forecast-${outlook.weather}`}
+      onClick={openForecast}
+      title={t("openForecast")}
+    >
       <Icon size={26} className="forecast-icon" />
-      <div>
-        <h2 className="slab forecast-title">{t(key)}</h2>
-        <p className="forecast-detail">{due}</p>
-        {outlook.stake > 0 && <p className="forecast-detail">{t("forecastStake", percent(outlook.stake, locale))}</p>}
-      </div>
-    </section>
+      <span className="forecast-text">
+        <span className="slab forecast-title">{t(key)}</span>
+        <span className="forecast-detail">{due}</span>
+        {outlook.stake > 0 && <span className="forecast-detail">{t("forecastStake", percent(outlook.stake, locale))}</span>}
+      </span>
+      <ChevronIcon size={18} className="forecast-chevron" />
+      <span className="sr-only">{t("openForecast")}</span>
+    </button>
   );
 }
 
@@ -224,6 +231,7 @@ function dueText(d: Deadline, now: Date, locale: string) {
 }
 
 function Badge({ d, locale }: { d: Deadline; locale: string }) {
+  if (d.grade?.display) return <span className="grade-badge">{d.grade.display}</span>;
   if (d.submitted === true) {
     return (
       <span className="done-badge">
@@ -246,25 +254,33 @@ function Badge({ d, locale }: { d: Deadline; locale: string }) {
   );
 }
 
+const KIND_KEYS: Record<Deadline["kind"], MessageKey> = {
+  assignment: "kindAssignment",
+  quiz: "kindQuiz",
+  event: "kindEvent",
+};
+
 export function DeadlineList({
   title,
   items,
   empty,
   store,
   now,
+  showKind = false,
 }: {
-  title: MessageKey;
+  title?: string;
   items: Deadline[];
   empty?: MessageKey;
   store: Store;
   now: Date;
+  showKind?: boolean;
 }) {
   const locale = uiLocale();
   const courses = new Map(store.candidates.map((c) => [c.id, c]));
   const selected = store.selectedCourseIds ?? [];
   return (
     <section className="list">
-      <h2 className="section-title">{t(title)}</h2>
+      {title && <h2 className="section-title">{title}</h2>}
       {items.length === 0 && empty && <p className="muted list-empty">{t(empty)}</p>}
       <ul>
         {items.map((d) => {
@@ -285,6 +301,12 @@ export function DeadlineList({
                     <span className="row-code">{courseLabel(courses.get(d.courseId))}</span>
                     {" · "}
                     {dueText(d, now, locale)}
+                    {showKind && (
+                      <>
+                        {" · "}
+                        {t(KIND_KEYS[d.kind])}
+                      </>
+                    )}
                   </span>
                 </span>
                 <Badge d={d} locale={locale} />

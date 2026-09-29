@@ -98,6 +98,12 @@ describe("runSync", () => {
     expect(r.weights).toEqual([
       { courseId: 100, rawTotal: 100, status: "exact", missing: 0, gradeSoFar: 90, releasedWeight: 20 },
     ]);
+    expect(r.gradeItems.map((g) => [g.id, g.name, g.weight, g.grade?.display ?? null])).toEqual([
+      [11, "Assignment 1", 20, "90 %"],
+      [12, "Quiz 1", 10, null],
+      [13, "Midterm", 30, null],
+      [14, "Final exam", 40, null],
+    ]);
   });
 
   it("keeps going when a tool is blocked (403) in a course", async () => {

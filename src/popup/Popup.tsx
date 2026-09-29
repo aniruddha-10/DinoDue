@@ -37,8 +37,8 @@ function Main({ store, now, onChangeCourses }: { store: Store; now: Date; onChan
   return (
     <>
       <ForecastCard outlook={outlook(visible, now)} />
-      <DeadlineList title="sectionUpNext" items={soon} empty="emptyUpNext" store={store} now={now} />
-      {later.length > 0 && <DeadlineList title="sectionLater" items={later} store={store} now={now} />}
+      <DeadlineList title={t("sectionUpNext")} items={soon} empty="emptyUpNext" store={store} now={now} />
+      {later.length > 0 && <DeadlineList title={t("sectionLater")} items={later} store={store} now={now} />}
       <footer className="footer">
         <span className="muted footer-status">
           {synced ? t("lastSynced", relativeTime(synced, now.getTime(), uiLocale())) : t("neverSynced")}

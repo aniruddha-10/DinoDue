@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
-// Extension pages (the popup; the forecast page will join it). The content
+// Extension pages: the popup and the forecast page. The content
 // script is built separately by vite.content.config.ts, because content
 // scripts can't be ES modules.
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
-      input: { popup: "popup.html" },
+      input: { popup: "popup.html", forecast: "forecast.html" },
     },
   },
   test: {

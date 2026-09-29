@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { RawCalendarEvent, RawCourse, RawEnrollment } from "./api";
-import { assignmentsToDeadlines, buildCandidates, eventsToDeadlines, hasTermTag, quizzesToDeadlines } from "./normalize";
+import { assignmentsToDeadlines, buildCandidates, eventsToDeadlines, hasTermTag, quizzesToDeadlines, shortCourseCode } from "./normalize";
 
 const NOW = new Date("2026-09-28T18:00:00Z");
 
@@ -17,6 +17,10 @@ const enrol = (id: number, role: string): RawEnrollment => ({ OrgUnit: { Id: id 
 
 describe("hasTermTag", () => {
   it.each([
+    ["F2026CPSC482L01", true], // UCalgary's real D2L code format
+    ["F2025CPSC482L01", false],
+    ["W2027CPSC482L01", false],
+    ["F20261CPSC", false],
     ["CPSC 331 - Fall 2026", true],
     ["F2026-CPSC331-L01", true],
     ["CPSC331_2026F", true],
@@ -27,6 +31,19 @@ describe("hasTermTag", () => {
     [null, false],
   ])("%s -> %s", (text, expected) => {
     expect(hasTermTag(text, NOW)).toBe(expected);
+  });
+});
+
+describe("shortCourseCode", () => {
+  it.each([
+    ["F2026CPSC482L01", "CPSC 482"],
+    ["W2027SENG511L01", "SENG 511"],
+    ["P2026MATH267", "MATH 267"],
+    ["CPSC 331", "CPSC 331"],
+    ["Sandbox-Library", "Sandbox-Library"],
+    [null, null],
+  ])("%s -> %s", (code, expected) => {
+    expect(shortCourseCode(code)).toBe(expected);
   });
 });
 

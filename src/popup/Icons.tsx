@@ -65,3 +65,9 @@ export const RefreshIcon = (p: Props) => (
     <path d="M19.5 4.5V11H13" />
   </Svg>
 );
+
+export const ChevronIcon = (p: Props) => (
+  <Svg {...p}>
+    <path d="M9.5 6l6 6-6 6" />
+  </Svg>
+);

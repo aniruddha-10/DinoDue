@@ -17,20 +17,29 @@ export function currentTerm(now: Date): { season: string; year: number } {
 const SEASON_TAGS: Record<string, string[]> = {
   fall: ["fall", "f"],
   winter: ["winter", "w"],
-  spring: ["spring", "sp"],
-  summer: ["summer", "su"],
+  spring: ["spring", "sp", "p"],
+  summer: ["summer", "su", "s"],
 };
 
-// Matches "Fall 2026", "F2026", "2026F", "fall_2026" and similar. UCalgary's
-// exact naming is not confirmed yet; this is one of three signals.
+// Matches UCalgary's D2L course codes, which start with the term
+// ("F2026CPSC482L01"), plus spelled-out forms like "Fall 2026" or "2026F".
 export function hasTermTag(text: string | null, now: Date): boolean {
   if (!text) return false;
   const { season, year } = currentTerm(now);
   const s = text.toLowerCase();
   return SEASON_TAGS[season].some((tag) => {
-    const re = new RegExp(`(^|[^a-z0-9])(${tag}[\\s_-]?${year}|${year}[\\s_-]?${tag})($|[^a-z0-9])`);
+    // Term then year may run straight into the subject ("f2026cpsc"), but not
+    // into more digits ("f20261").
+    const re = new RegExp(`(^|[^a-z0-9])(${tag}[\\s_-]?${year}(?![0-9])|${year}[\\s_-]?${tag}(?![a-z0-9]))`);
     return re.test(s);
   });
+}
+
+// "F2026CPSC482L01" -> "CPSC 482". Anything else is returned as is.
+export function shortCourseCode(code: string | null): string | null {
+  if (!code) return null;
+  const m = /^[a-z]{1,2}\d{4}([a-z]{3,4})(\d{3})/i.exec(code.trim());
+  return m ? `${m[1].toUpperCase()} ${m[2]}` : code;
 }
 
 // Which of the student's courses to offer in the picker, and which to pre-tick.
