@@ -88,6 +88,13 @@ export interface SyncState {
   error: SyncErrorCode | null;
 }
 
+// Reminder notifications. `leadsHours` are how long before a deadline to
+// remind, e.g. [48, 3] = two days before and three hours before.
+export interface ReminderSettings {
+  enabled: boolean;
+  leadsHours: number[];
+}
+
 // Everything kept in chrome.storage.local.
 export interface Store {
   user: User | null;
@@ -100,6 +107,10 @@ export interface Store {
   weights: CourseWeights[];
   sync: SyncState;
   pendingSync: boolean;
+  reminders: ReminderSettings;
+  // Reminders already shown: "<deadline id>@<lead hours>" -> when. Pruned
+  // once a deadline has passed.
+  remindersSent: Record<string, number>;
 }
 
 export const EMPTY_STORE: Store = {
@@ -113,4 +124,6 @@ export const EMPTY_STORE: Store = {
   weights: [],
   sync: { status: "idle", startedAt: null, lastSyncedAt: null, error: null },
   pendingSync: false,
+  reminders: { enabled: true, leadsHours: [48] },
+  remindersSent: {},
 };

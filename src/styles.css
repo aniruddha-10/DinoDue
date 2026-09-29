@@ -390,3 +390,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .chip-fuzzy { background: var(--warn-bg); color: var(--warn-text); }
 .chip-manual { color: var(--ok); }
 @media (max-width: 560px) { .match { flex-wrap: wrap; } .match select { max-width: 100%; width: 100%; } }
+
+.stack { display: grid; gap: 16px; min-width: 0; }
+.toggle-main { font-size: 13px; font-weight: 600; margin-top: 8px; }
+.lead-options { display: grid; gap: 4px; border: 0; margin: 6px 0 0 22px; padding: 0; }
+.reminders-denied { margin: 10px 0 0; }
+.reminders-note { margin: 10px 0; }

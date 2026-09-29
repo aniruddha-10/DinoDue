@@ -130,6 +130,13 @@ const chromeMock = {
     },
   },
   runtime: { getURL: (path: string) => `/${path}` },
+  notifications: {
+    create(id: string, opts: { title: string; message: string }) {
+      console.info("[mock] notification", id, opts.title, "-", opts.message);
+      (globalThis as unknown as { __notifications: unknown[] }).__notifications.push({ id, ...opts });
+    },
+    getPermissionLevel: (cb: (level: string) => void) => cb("granted"),
+  },
   tabs: {
     async query() {
       return [];
@@ -141,4 +148,5 @@ const chromeMock = {
   },
 };
 
+(globalThis as unknown as { __notifications: unknown[] }).__notifications = [];
 (globalThis as unknown as { chrome: unknown }).chrome = chromeMock;

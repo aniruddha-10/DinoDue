@@ -37,6 +37,8 @@ for Vite 7+.)
 - `src/d2l/link.ts`: tying deadlines to gradebook entries.
 - `src/d2l/sync.ts`: the whole fetch, step by step.
 - `src/content/index.ts`: when syncing happens (runs on D2L pages).
+- `src/background/index.ts`: the service worker that shows reminder
+  notifications; the rules for which ones are in `src/shared/reminders.ts`.
 - `src/shared/forecast.ts`: this week's "weather" and the Up next lists.
 - `src/shared/format.ts`, `colors.ts`, `i18n.ts`: dates, course colours, text.
 - `src/shared/skyline.ts`: the term as weeks, for the forecast page.
@@ -44,6 +46,7 @@ for Vite 7+.)
 - `src/popup/`: the popup (course picker, forecast, deadlines).
 - `src/forecast/`: the term forecast page (skyline, courses, weight matches).
 - `dev/`: a stand-in for the chrome.* APIs used by `npm run dev`.
+- `scripts/make-icons.mjs`: draws the extension icon (`npm run icons`).
 - `probe/`: the scripts used to check what UCalgary's D2L API allows.
   Their findings are summarized in the comments of the files above.
 

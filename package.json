@@ -5,10 +5,11 @@
   "description": "UCalgary D2L deadlines, grade weights, and a workload forecast.",
   "type": "module",
   "scripts": {
-    "build": "tsc --noEmit && vite build && vite build -c vite.content.config.ts",
+    "build": "tsc --noEmit && vite build && vite build -c vite.scripts.config.ts --mode content && vite build -c vite.scripts.config.ts --mode background",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "dev": "vite serve dev --config vite.config.ts --port 5179 --strictPort"
+    "dev": "vite serve dev --config vite.config.ts --port 5179 --strictPort",
+    "icons": "node scripts/make-icons.mjs"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.0",

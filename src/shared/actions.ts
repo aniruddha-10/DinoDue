@@ -2,7 +2,8 @@
 // content script on a D2L page (it has the student's session), so the pages
 // just set a flag.
 
-import { D2L_ORIGIN } from "../types";
+import { D2L_ORIGIN, type ReminderSettings } from "../types";
+import { t } from "./i18n";
 import { applyManualLinks } from "./links";
 import { patchStore, readStore } from "./storage";
 
@@ -47,4 +48,23 @@ export async function setEventsHidden(courseId: number, hidden: boolean) {
   if (hidden) ids.add(courseId);
   else ids.delete(courseId);
   await patchStore({ hiddenEventCourseIds: [...ids] });
+}
+
+export async function setReminders(settings: ReminderSettings) {
+  await patchStore({ reminders: { enabled: settings.enabled, leadsHours: [...settings.leadsHours].sort((a, b) => b - a) } });
+}
+
+// A sample notification, so students can check Chrome and macOS let it through.
+export function sendTestReminder() {
+  void chrome.notifications.create("test", {
+    type: "basic",
+    iconUrl: "icons/icon-128.png",
+    title: t("testTitle"),
+    message: t("testBody"),
+  });
+}
+
+// "granted" or "denied" (Chrome-level only; macOS can still block Chrome).
+export function notificationPermission(): Promise<string> {
+  return new Promise((resolve) => chrome.notifications.getPermissionLevel((level) => resolve(level)));
 }

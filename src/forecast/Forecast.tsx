@@ -1,5 +1,5 @@
-import { useMemo, useState, type CSSProperties } from "react";
-import { setEventsHidden, setGradeLink } from "../shared/actions";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { notificationPermission, sendTestReminder, setEventsHidden, setGradeLink, setReminders } from "../shared/actions";
 import { courseColor } from "../shared/colors";
 import { visibleDeadlines } from "../shared/forecast";
 import { needsReview } from "../shared/links";
@@ -62,6 +62,7 @@ function Body({ store, now }: { store: Store; now: Date }) {
           )}
         </section>
 
+        <div className="stack">
         <section className="card">
           <h2 className="slab card-title">{t("coursesTitle")}</h2>
           <ul className="course-list">
@@ -77,6 +78,8 @@ function Body({ store, now }: { store: Store; now: Date }) {
             ))}
           </ul>
         </section>
+        <Reminders store={store} />
+        </div>
       </div>
 
       <MatchReview store={store} now={now} />
@@ -201,6 +204,67 @@ function MatchReview({ store, now }: { store: Store; now: Date }) {
           </ul>
         </>
       )}
+    </section>
+  );
+}
+
+// ---- Reminders ----
+
+const LEADS: { hours: number; key: MessageKey }[] = [
+  { hours: 48, key: "remindLead48" },
+  { hours: 24, key: "remindLead24" },
+  { hours: 3, key: "remindLead3" },
+];
+
+function Reminders({ store }: { store: Store }) {
+  const { reminders } = store;
+  const [denied, setDenied] = useState(false);
+  useEffect(() => {
+    void notificationPermission().then((level) => setDenied(level !== "granted"));
+  }, []);
+
+  const toggleLead = (hours: number, on: boolean) => {
+    const leads = new Set(reminders.leadsHours);
+    if (on) leads.add(hours);
+    else leads.delete(hours);
+    void setReminders({ ...reminders, leadsHours: [...leads] });
+  };
+
+  return (
+    <section className="card">
+      <h2 className="slab card-title">{t("remindersTitle")}</h2>
+      <label className="toggle toggle-main">
+        <input
+          type="checkbox"
+          checked={reminders.enabled}
+          onChange={(e) => void setReminders({ ...reminders, enabled: e.target.checked })}
+        />
+        {t("remindersEnabled")}
+      </label>
+      {reminders.enabled && (
+        <fieldset className="lead-options">
+          <legend className="sr-only">{t("remindersTitle")}</legend>
+          {LEADS.map(({ hours, key }) => (
+            <label key={hours} className="toggle">
+              <input
+                type="checkbox"
+                checked={reminders.leadsHours.includes(hours)}
+                onChange={(e) => toggleLead(hours, e.target.checked)}
+              />
+              {t(key)}
+            </label>
+          ))}
+        </fieldset>
+      )}
+      {denied && (
+        <p className="banner banner-warn reminders-denied" role="status">
+          {t("remindersDenied")}
+        </p>
+      )}
+      <p className="muted course-line reminders-note">{t("remindersNote")}</p>
+      <button type="button" className="ghost-btn" onClick={sendTestReminder}>
+        {t("remindersTest")}
+      </button>
     </section>
   );
 }

@@ -486,5 +486,121 @@
         "example": "DinoDue"
       }
     }
+  },
+  "notifyBody": {
+    "message": "$COURSE$, due $WHEN$",
+    "description": "Reminder notification text.",
+    "placeholders": {
+      "course": {
+        "content": "$1",
+        "example": "CPSC 331"
+      },
+      "when": {
+        "content": "$2",
+        "example": "tomorrow at 11:59 PM"
+      }
+    }
+  },
+  "notifyBodyWeight": {
+    "message": "$COURSE$, due $WHEN$ · worth $PERCENT$",
+    "description": "Reminder notification text when the weight is known.",
+    "placeholders": {
+      "course": {
+        "content": "$1",
+        "example": "CPSC 331"
+      },
+      "when": {
+        "content": "$2",
+        "example": "tomorrow at 11:59 PM"
+      },
+      "percent": {
+        "content": "$3",
+        "example": "10%"
+      }
+    }
+  },
+  "whenToday": {
+    "message": "today at $TIME$",
+    "description": "Due time inside a sentence, today.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "whenTomorrow": {
+    "message": "tomorrow at $TIME$",
+    "description": "Due time inside a sentence, tomorrow.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "notifySummaryTitle": {
+    "message": "$COUNT$ things due soon",
+    "description": "Title of a grouped reminder.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "notifySummaryBody": {
+    "message": "Next: $TITLE$, due $WHEN$",
+    "description": "Body of a grouped reminder.",
+    "placeholders": {
+      "title": {
+        "content": "$1",
+        "example": "Midterm 1"
+      },
+      "when": {
+        "content": "$2",
+        "example": "today at 6:00 PM"
+      }
+    }
+  },
+  "remindersTitle": {
+    "message": "Reminders",
+    "description": "Heading of the reminder settings."
+  },
+  "remindersEnabled": {
+    "message": "Remind me before things are due",
+    "description": "Turns reminder notifications on or off."
+  },
+  "remindLead48": {
+    "message": "2 days before",
+    "description": "Reminder lead time option."
+  },
+  "remindLead24": {
+    "message": "1 day before",
+    "description": "Reminder lead time option."
+  },
+  "remindLead3": {
+    "message": "3 hours before",
+    "description": "Reminder lead time option."
+  },
+  "remindersNote": {
+    "message": "Reminders use what DinoDue last synced from D2L, so one may still arrive for something you've submitted since.",
+    "description": "Explains that reminders rely on the last sync."
+  },
+  "remindersTest": {
+    "message": "Send a test reminder",
+    "description": "Button that shows a sample notification."
+  },
+  "remindersDenied": {
+    "message": "Chrome can't show notifications right now. Check Chrome's notification settings, and on a Mac, System Settings > Notifications > Google Chrome.",
+    "description": "Shown when notifications are blocked."
+  },
+  "testTitle": {
+    "message": "DinoDue reminders are on",
+    "description": "Title of the test notification."
+  },
+  "testBody": {
+    "message": "This is what a reminder looks like.",
+    "description": "Body of the test notification."
   }
 }
