@@ -1,20 +1,21 @@
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
-// Content scripts can't be ES modules, so the content script is built as a
-// single self-contained IIFE. The popup and forecast pages will get their own
-// entries when the UI is added.
+// Extension pages (the popup; the forecast page will join it). The content
+// script is built separately by vite.content.config.ts, because content
+// scripts can't be ES modules.
 export default defineConfig({
+  plugins: [react()],
+  base: "./",
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    lib: {
-      entry: "src/content/index.ts",
-      name: "dinodueContent",
-      formats: ["iife"],
-      fileName: () => "content.js",
+    rollupOptions: {
+      input: { popup: "popup.html" },
     },
   },
   test: {
     environment: "node",
+    env: { TZ: "America/Edmonton" }, // Calgary time, so date tests are stable
   },
 });

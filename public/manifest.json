@@ -4,12 +4,24 @@
   "description": "__MSG_extDescription__",
   "version": "0.1.0",
   "default_locale": "en",
-  "permissions": ["storage"],
-  "host_permissions": ["https://d2l.ucalgary.ca/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://d2l.ucalgary.ca/*"
+  ],
+  "action": {
+    "default_title": "__MSG_extName__",
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
-      "matches": ["https://d2l.ucalgary.ca/d2l/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://d2l.ucalgary.ca/d2l/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ]

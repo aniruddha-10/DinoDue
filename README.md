@@ -16,6 +16,14 @@ Then open chrome://extensions, turn on Developer mode, click "Load unpacked",
 and pick the `dist` folder. After changing code, run `npm run build` again and
 click the reload icon on the extension card.
 
+To preview the popup in a normal browser tab with sample data (no extension
+or D2L needed):
+
+    npm run dev
+
+then open http://localhost:5179/?state=main (or `welcome`, `picker`, `quiet`,
+`signedOut`).
+
 Requires Node 20+. (Vite 6 / Vitest 3 are used because Node 20.15 is too old
 for Vite 7+.)
 
@@ -28,6 +36,10 @@ for Vite 7+.)
 - `src/d2l/link.ts`: tying deadlines to gradebook entries.
 - `src/d2l/sync.ts`: the whole fetch, step by step.
 - `src/content/index.ts`: when syncing happens (runs on D2L pages).
+- `src/shared/forecast.ts`: this week's "weather" and the Up next lists.
+- `src/shared/format.ts`, `colors.ts`, `i18n.ts`: dates, course colours, text.
+- `src/popup/`: the popup (course picker, forecast, deadlines).
+- `dev/`: a stand-in for the chrome.* APIs used by `npm run dev`.
 - `probe/`: the scripts used to check what UCalgary's D2L API allows.
   Their findings are summarized in the comments of the files above.
 

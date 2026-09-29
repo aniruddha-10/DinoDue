@@ -6,5 +6,203 @@
   "extDescription": {
     "message": "Your UCalgary D2L deadlines, grade weights, and a weekly workload forecast. Not affiliated with the University of Calgary or D2L.",
     "description": "Extension description shown in the Chrome Web Store and chrome://extensions."
+  },
+
+  "termFall": {
+    "message": "Fall $YEAR$",
+    "description": "Term label in the popup header.",
+    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+  },
+  "termWinter": {
+    "message": "Winter $YEAR$",
+    "description": "Term label in the popup header.",
+    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+  },
+  "termSpring": {
+    "message": "Spring $YEAR$",
+    "description": "Term label in the popup header.",
+    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+  },
+  "termSummer": {
+    "message": "Summer $YEAR$",
+    "description": "Term label in the popup header.",
+    "placeholders": { "year": { "content": "$1", "example": "2026" } }
+  },
+
+  "welcomeTitle": {
+    "message": "See what's due, and what it's worth",
+    "description": "Heading on the first screen, before DinoDue has read D2L."
+  },
+  "welcomeBody": {
+    "message": "Open D2L and sign in. DinoDue reads your courses from there and keeps everything in this browser.",
+    "description": "Body text on the first screen."
+  },
+  "openD2L": {
+    "message": "Open D2L",
+    "description": "Button that opens d2l.ucalgary.ca in a new tab."
+  },
+
+  "bannerSyncing": {
+    "message": "Syncing with D2L…",
+    "description": "Status while DinoDue is reading D2L."
+  },
+  "bannerWaiting": {
+    "message": "Open or refresh a D2L page to sync.",
+    "description": "Shown when a sync was requested but no D2L page has picked it up yet."
+  },
+  "bannerSignedOut": {
+    "message": "You're signed out of D2L. Sign in to refresh.",
+    "description": "Shown when D2L says the session has expired."
+  },
+  "bannerErrorNetwork": {
+    "message": "Couldn't reach D2L. Showing your last sync.",
+    "description": "Shown when the network failed during a sync."
+  },
+  "bannerErrorD2L": {
+    "message": "D2L returned an error. Showing your last sync.",
+    "description": "Shown when D2L returned an unexpected error during a sync."
+  },
+  "bannerErrorVersions": {
+    "message": "D2L didn't respond as expected. Try again later.",
+    "description": "Shown when D2L's API version list couldn't be read."
+  },
+
+  "pickerTitle": {
+    "message": "Pick this term's courses",
+    "description": "Heading of the course picker."
+  },
+  "pickerBody": {
+    "message": "The ones that look current are already ticked. You can change this later.",
+    "description": "Explanation under the course picker heading."
+  },
+  "pickerSuggested": {
+    "message": "Suggested",
+    "description": "Section heading for courses DinoDue thinks are current."
+  },
+  "pickerOther": {
+    "message": "Other courses",
+    "description": "Section heading for the rest of the student's courses."
+  },
+  "reasonDates": {
+    "message": "Runs this term",
+    "description": "Why a course was suggested: its D2L dates include today."
+  },
+  "reasonTermInName": {
+    "message": "Term in name",
+    "description": "Why a course was suggested: its name includes this term."
+  },
+  "reasonRecentlyOpened": {
+    "message": "Opened recently",
+    "description": "Why a course was suggested: the student opened it in the last two weeks."
+  },
+  "pickerSelectedOne": {
+    "message": "1 course selected",
+    "description": "Course picker count, singular."
+  },
+  "pickerSelectedOther": {
+    "message": "$COUNT$ courses selected",
+    "description": "Course picker count, plural.",
+    "placeholders": { "count": { "content": "$1", "example": "5" } }
+  },
+  "pickerSave": {
+    "message": "Save courses",
+    "description": "Button that saves the course selection."
+  },
+  "pickerNoneSelected": {
+    "message": "Pick at least one course.",
+    "description": "Error shown when saving with no courses ticked."
+  },
+  "pickerEmpty": {
+    "message": "No courses found. Check that you're enrolled in D2L, then sync again.",
+    "description": "Shown when D2L returned no usable courses."
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Button that closes the course picker without saving."
+  },
+
+  "forecastStorm": {
+    "message": "Storm warning this week",
+    "description": "Forecast headline for a heavy week."
+  },
+  "forecastCloudy": {
+    "message": "Cloudy week ahead",
+    "description": "Forecast headline for a moderate week."
+  },
+  "forecastClear": {
+    "message": "Clear skies",
+    "description": "Forecast headline for a light or empty week."
+  },
+  "forecastDueOne": {
+    "message": "1 due in the next 7 days",
+    "description": "Forecast detail, singular."
+  },
+  "forecastDueOther": {
+    "message": "$COUNT$ due in the next 7 days",
+    "description": "Forecast detail, plural.",
+    "placeholders": { "count": { "content": "$1", "example": "4" } }
+  },
+  "forecastNoneDue": {
+    "message": "Nothing due in the next 7 days",
+    "description": "Forecast detail when nothing is due."
+  },
+  "forecastStake": {
+    "message": "$PERCENT$ of your grades at stake",
+    "description": "Forecast detail: combined weight of what's due this week.",
+    "placeholders": { "percent": { "content": "$1", "example": "42%" } }
+  },
+
+  "sectionUpNext": {
+    "message": "Up next, by impact",
+    "description": "Heading for deadlines in the next 7 days, sorted by grade weight."
+  },
+  "sectionLater": {
+    "message": "Later",
+    "description": "Heading for deadlines 1 to 3 weeks away."
+  },
+  "emptyUpNext": {
+    "message": "Nothing due soon. Enjoy the chinook.",
+    "description": "Shown when there are no upcoming deadlines. A chinook is Calgary's warm winter wind."
+  },
+  "submitted": {
+    "message": "Submitted",
+    "description": "Badge on an assignment the student has submitted."
+  },
+  "weightFuzzy": {
+    "message": "Weight matched by name. Check it in D2L.",
+    "description": "Tooltip on a weight that was matched to the gradebook by a similar name."
+  },
+  "weightOf": {
+    "message": "$PERCENT$ of final grade",
+    "description": "Accessible label for the weight badge.",
+    "placeholders": { "percent": { "content": "$1", "example": "25%" } }
+  },
+  "dueToday": {
+    "message": "Today, $TIME$",
+    "description": "Due time for something due today.",
+    "placeholders": { "time": { "content": "$1", "example": "6:00 PM" } }
+  },
+  "dueTomorrow": {
+    "message": "Tomorrow, $TIME$",
+    "description": "Due time for something due tomorrow.",
+    "placeholders": { "time": { "content": "$1", "example": "6:00 PM" } }
+  },
+
+  "syncNow": {
+    "message": "Sync",
+    "description": "Button that refreshes data from D2L."
+  },
+  "changeCourses": {
+    "message": "Change courses",
+    "description": "Link that reopens the course picker."
+  },
+  "lastSynced": {
+    "message": "Synced $WHEN$",
+    "description": "When the last sync finished.",
+    "placeholders": { "when": { "content": "$1", "example": "5 minutes ago" } }
+  },
+  "neverSynced": {
+    "message": "Not synced yet",
+    "description": "Shown before the first sync finishes."
   }
 }

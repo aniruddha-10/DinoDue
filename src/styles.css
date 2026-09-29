@@ -1,0 +1,288 @@
+/* DinoDue. UCalgary brand colours (ucalgary.ca/brand): red and gold lead,
+   secondary colours only for course stripes, neutrals only for text.
+   Montserrat and Zilla Slab stand in for Gotham and Museo Slab. */
+
+:root {
+  --red: #d6001c;
+  --gold: #ffcd00;
+  --berry: #9c0534;
+
+  --bg: #ffffff;
+  --surface: #f5f5f6;
+  --text: #1a1a1a;
+  --muted: #6d6e71;
+  --line: #e4e4e6;
+  --header-bg: var(--red);
+  --primary-bg: var(--red);
+  --primary-text: #ffffff;
+  --link: #c00019;
+  --ok: #2a7552;
+  --warn-bg: #fff6d1;
+  --warn-text: #6c3302;
+  --info-bg: var(--surface);
+
+  --storm-bg: #fff6d1;
+  --storm-line: #ffe57b;
+  --storm-text: #6c3302;
+  --storm-icon: var(--berry);
+  --cloudy-bg: var(--surface);
+  --cloudy-line: var(--line);
+  --cloudy-text: var(--text);
+  --cloudy-icon: var(--muted);
+  --clear-bg: var(--surface);
+  --clear-line: var(--line);
+  --clear-text: var(--text);
+  --clear-icon: #b8470f;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --surface: #1e1e20;
+    --text: #f2f2f2;
+    --muted: #b4b5b8;
+    --line: #2e2e31;
+    --header-bg: var(--berry);
+    --primary-bg: var(--gold);
+    --primary-text: #1a1a1a;
+    --link: #ffcd00;
+    --ok: #6fcb9f;
+    --warn-bg: #2b2305;
+    --warn-text: #ffe57b;
+
+    --storm-bg: #2b2305;
+    --storm-line: #5c4a0a;
+    --storm-text: #ffe57b;
+    --storm-icon: #ffcd00;
+    --cloudy-icon: var(--muted);
+    --clear-icon: #ffc04d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  width: 360px;
+  max-height: 600px; /* Chrome's popup limit; scroll inside it */
+  overflow-y: auto;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 13px/1.45 "Montserrat", system-ui, sans-serif;
+}
+
+h1, h2, p { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.slab { font-family: "Zilla Slab", Georgia, serif; font-weight: 600; }
+.muted { color: var(--muted); }
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* ---- Header ---- */
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  background: var(--header-bg);
+  color: #ffffff;
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-name { font: 600 22px/1 "Zilla Slab", Georgia, serif; letter-spacing: 0.2px; }
+.term { font-size: 11px; font-weight: 500; }
+.tartan { display: block; width: 100%; height: 8px; }
+
+/* ---- Banner ---- */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 14px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.banner-info { background: var(--info-bg); color: var(--text); }
+.banner-warn { background: var(--warn-bg); color: var(--warn-text); }
+.banner .link-btn { margin-left: auto; white-space: nowrap; }
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border: 2px solid var(--line);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+/* ---- Buttons ---- */
+
+.primary-btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  background: var(--primary-bg);
+  color: var(--primary-text);
+  font-weight: 600;
+}
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ghost-btn:hover { background: var(--surface); }
+.link-btn {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ---- Welcome ---- */
+
+.welcome { display: grid; gap: 12px; padding: 24px 18px 22px; }
+.welcome-title { font-size: 20px; line-height: 1.2; }
+.welcome .primary-btn { justify-self: start; }
+
+/* ---- Picker ---- */
+
+.picker { display: flex; flex-direction: column; padding: 16px 14px 14px; max-height: 540px; }
+.picker-title { font-size: 18px; }
+.picker-body { margin: 4px 0 10px; font-size: 12px; }
+.pick-list { overflow-y: auto; margin: 0 -14px; padding: 0 14px; }
+.pick-group { border: 0; margin: 0 0 10px; padding: 0; }
+.pick-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 2px;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+}
+.pick-row input { width: 16px; height: 16px; margin: 0; flex: none; accent-color: var(--red); }
+.pick-text { display: grid; min-width: 0; flex: 1; }
+.pick-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pick-code { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+.picker-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.picker-actions { display: flex; gap: 8px; }
+.error-text { color: var(--link); font-weight: 600; }
+
+/* ---- Forecast ---- */
+
+.forecast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px;
+  padding: 12px 14px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+.forecast-title { font-size: 16px; line-height: 1.2; }
+.forecast-detail { font-size: 12px; }
+.forecast-icon { flex: none; }
+.forecast-storm { background: var(--storm-bg); border-color: var(--storm-line); color: var(--storm-text); }
+.forecast-storm .forecast-icon { color: var(--storm-icon); }
+.forecast-cloudy { background: var(--cloudy-bg); border-color: var(--cloudy-line); color: var(--cloudy-text); }
+.forecast-cloudy .forecast-icon { color: var(--cloudy-icon); }
+.forecast-clear { background: var(--clear-bg); border-color: var(--clear-line); color: var(--clear-text); }
+.forecast-clear .forecast-icon { color: var(--clear-icon); }
+
+/* ---- Deadline lists ---- */
+
+.section-title {
+  padding: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+.list .section-title { padding: 0 14px 6px; }
+.list { margin-bottom: 8px; }
+.list-empty { padding: 4px 14px 10px; }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 14px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  text-align: left;
+}
+.row:hover { background: var(--surface); }
+.row-bar { width: 3px; height: 32px; flex: none; background: var(--bar); }
+.row-main { display: grid; min-width: 0; flex: 1; }
+.row-title { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-meta { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-code { color: var(--ct); font-weight: 600; }
+@media (prefers-color-scheme: dark) { .row-code { color: var(--ctd); } }
+.row-done .row-title { color: var(--muted); }
+
+.weight-badge {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #1a1a1a;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.weight-fuzzy { background: transparent; color: var(--text); border: 1.5px dashed var(--gold); }
+.done-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  color: var(--ok);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ---- Footer ---- */
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px 12px;
+  border-top: 1px solid var(--line);
+}
+.footer-status { flex: 1; font-size: 11px; }
